@@ -18,3 +18,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return response()->json();
 });
+
+Route::apiResource('tasks', '\App\Http\Controllers\TaskController');
