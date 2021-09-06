@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Task\CreateTaskRequest;
 use App\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class TaskController extends Controller
 {
@@ -49,6 +51,7 @@ class TaskController extends Controller
      *         response=422,
      *         description="Unprocessable Entity"
      *     ),
+     *     requestBody={"$ref": "#/components/requestBodies/CreateTask"}
      * )
      */
     public function store(Request $request)
@@ -112,6 +115,16 @@ class TaskController extends Controller
      *     path="/tasks/{taskId}",
      *     tags={"tasks"},
      *     operationId="updateTask",
+     *     @OA\Parameter(
+     *         name="taskId",
+     *         in="path",
+     *         description="Task id to return",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="successful operation"

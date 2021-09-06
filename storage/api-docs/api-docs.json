@@ -35,6 +35,9 @@
                 "summary": "Create a Task",
                 "description": "Create a single task",
                 "operationId": "addTask",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/CreateTask"
+                },
                 "responses": {
                     "201": {
                         "description": "successful operation"
@@ -120,6 +123,38 @@
         }
     },
     "components": {
+        "schemas": {
+            "Task": {
+                "title": "Task",
+                "description": "Task model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "format": "int64"
+                    },
+                    "title": {
+                        "title": "Title"
+                    },
+                    "body": {
+                        "title": "body"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "requestBodies": {
+            "CreateTask": {
+                "description": "Task object that needs to be added to the database",
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Task"
+                        }
+                    }
+                }
+            }
+        },
         "securitySchemes": {
             "api_key": {
                 "type": "apiKey",
