@@ -56,7 +56,7 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $request->validate([
             'title' => 'required',
             'body' => 'required',
             'user_id' => 'required|exists:App\User,id'
@@ -118,7 +118,7 @@ class TaskController extends Controller
      *     @OA\Parameter(
      *         name="taskId",
      *         in="path",
-     *         description="Task id to return",
+     *         description="Task id to patch",
      *         required=true,
      *         @OA\Schema(
      *             type="integer",
@@ -133,17 +133,18 @@ class TaskController extends Controller
      *         response=404,
      *         description="Task not found"
      *     ),
+     *     requestBody={"$ref": "#/components/requestBodies/CreateTask"}
      * )
      */
     public function update(Request $request, Task $task)
     {
-        $this->validate($request, [
+        $request->validate([
             'user_id' => 'nullable|exists:App\User,id'
         ]);
 
-        $updated = $task->update($request->all());
+        $task->update($request->all());
 
-        return response()->json($updated);
+        return response()->json($task);
     }
 
     /**

@@ -29,5 +29,21 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Task extends Model
 {
-    //
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'user_id' => 'integer',
+    ];
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title', 'body', 'user_id'
+    ];
 }

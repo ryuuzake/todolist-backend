@@ -111,6 +111,21 @@
                 ],
                 "summary": "Update the specified resource in storage.",
                 "operationId": "updateTask",
+                "parameters": [
+                    {
+                        "name": "taskId",
+                        "in": "path",
+                        "description": "Task id to patch",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/CreateTask"
+                },
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -133,10 +148,12 @@
                         "format": "int64"
                     },
                     "title": {
-                        "title": "Title"
+                        "title": "Title",
+                        "format": "string"
                     },
                     "body": {
-                        "title": "body"
+                        "title": "body",
+                        "format": "string"
                     }
                 },
                 "type": "object"
