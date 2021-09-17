@@ -1,0 +1,434 @@
+openapi: 3.0.0
+info:
+  title: Todolist Backend
+  version: 1.0.0
+servers:
+  - url: http://127.0.0.1:8000
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+security:
+  - bearerAuth: []
+tags:
+  - name: Task
+paths:
+  /tasks:
+    get:
+      tags:
+        - Task
+      summary: Get All Tasks
+      responses:
+        '200':
+          description: OK
+          headers:
+            Host:
+              schema:
+                type: number
+                example: 127.0.0.1:8000
+            Date:
+              schema:
+                type: string
+                example: Fri, 17 Sep 2021 22:40:28 GMT
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: number
+                example: PHP/7.3.30
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '59'
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example-0:
+                  summary: Get All Tasks Empty
+                  value: []
+                example-1:
+                  summary: Get All Tasks Filled
+                  value:
+                    - id: 1
+                      title: Example
+                      body: This is example
+                      user_id: 1
+                      created_at: '2021-09-17T22:48:27.000000Z'
+                      updated_at: '2021-09-17T22:48:27.000000Z'
+    post:
+      tags:
+        - Task
+      summary: Create Task
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                title: Example
+                body: This is example
+                user_id: 1
+      responses:
+        '201':
+          description: Created
+          headers:
+            Host:
+              schema:
+                type: number
+                example: 127.0.0.1:8000
+            Date:
+              schema:
+                type: string
+                example: Fri, 17 Sep 2021 22:48:27 GMT
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: number
+                example: PHP/7.3.30
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '54'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                title: Example
+                body: This is example
+                user_id: 1
+                updated_at: '2021-09-17T22:48:27.000000Z'
+                created_at: '2021-09-17T22:48:27.000000Z'
+                id: 1
+        '302':
+          description: Found
+          headers:
+            Host:
+              schema:
+                type: number
+                example: 127.0.0.1:8000
+            Date:
+              schema:
+                type: string
+                example: Fri, 17 Sep 2021 22:50:02 GMT
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: number
+                example: PHP/7.3.30
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '58'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                message: The given data was invalid.
+                status: 302
+  /tasks/{id}:
+    get:
+      tags:
+        - Task
+      summary: Get Task
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Host:
+              schema:
+                type: number
+                example: 127.0.0.1:8000
+            Date:
+              schema:
+                type: string
+                example: Fri, 17 Sep 2021 22:50:28 GMT
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: number
+                example: PHP/7.3.30
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '57'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1
+                title: Example
+                body: This is example
+                user_id: 1
+                created_at: '2021-09-17T22:48:27.000000Z'
+                updated_at: '2021-09-17T22:48:27.000000Z'
+        '404':
+          description: Not Found
+          headers:
+            Host:
+              schema:
+                type: number
+                example: 127.0.0.1:8000
+            Date:
+              schema:
+                type: string
+                example: Fri, 17 Sep 2021 22:53:09 GMT
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: number
+                example: PHP/7.3.30
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '58'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                message: No query results for model [App\Task] 1
+                status: 404
+    patch:
+      tags:
+        - Task
+      summary: Update Task
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                title: New Example
+                body: This is a new example
+                user_id: 1
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Host:
+              schema:
+                type: number
+                example: 127.0.0.1:8000
+            Date:
+              schema:
+                type: string
+                example: Fri, 17 Sep 2021 22:51:45 GMT
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: number
+                example: PHP/7.3.30
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '59'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1
+                title: New Example
+                body: This is a new example
+                user_id: 1
+                created_at: '2021-09-17T22:48:27.000000Z'
+                updated_at: '2021-09-17T22:51:45.000000Z'
+    delete:
+      tags:
+        - Task
+      summary: Delete Task
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1'
+      responses:
+        '204':
+          description: No Content
+          headers:
+            Host:
+              schema:
+                type: number
+                example: 127.0.0.1:8000
+            Date:
+              schema:
+                type: string
+                example: Fri, 17 Sep 2021 22:52:39 GMT
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: number
+                example: PHP/7.3.30
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '56'
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: null
+        '404':
+          description: Not Found
+          headers:
+            Host:
+              schema:
+                type: number
+                example: 127.0.0.1:8000
+            Date:
+              schema:
+                type: string
+                example: Fri, 17 Sep 2021 22:52:53 GMT
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: number
+                example: PHP/7.3.30
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '59'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                message: No query results for model [App\Task] 1
+                status: 404
