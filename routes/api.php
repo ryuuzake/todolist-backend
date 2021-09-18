@@ -19,4 +19,12 @@ Route::get('/', function () {
     return response()->json();
 });
 
+Route::group(['prefix' => 'auth'], function ($router) {
+    Route::post('login', 'AuthController@login');
+    Route::post('register', 'AuthController@register');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
+});
+
 Route::apiResource('tasks', '\App\Http\Controllers\TaskController');
