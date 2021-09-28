@@ -1,6 +1,11 @@
 Todolist Backend for WPPL 2021
 ===
 
+Database Design
+---
+![Database Design](./Todolist_Backend_Design.png)
+
+
 How to install forget password system
 ---
 [Documentation Link](https://laravel.com/docs/7.x/passwords)
