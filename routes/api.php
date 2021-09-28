@@ -25,6 +25,9 @@ Route::group(['prefix' => 'auth'], function ($router) {
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
+
+    Route::post('forget-password', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+    Route::post('reset-password', 'Auth\ResetPasswordController@reset');
 });
 
-Route::apiResource('tasks', '\App\Http\Controllers\TaskController');
+Route::apiResource('tasks', 'TaskController');

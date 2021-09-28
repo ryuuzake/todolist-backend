@@ -3,8 +3,6 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -52,16 +50,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        $parentRender = parent::render($request, $exception);
-
-        if ($parentRender instanceof JsonResponse) {
-            return $parentRender;
-        }
-
-        return new JsonResponse([
-            'message' => $exception->getMessage(),
-            'status' => $parentRender->getStatusCode(),
-        ], $parentRender->getStatusCode());
-
+        return parent::render($request, $exception);
     }
 }
