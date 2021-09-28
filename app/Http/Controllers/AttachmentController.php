@@ -10,22 +10,38 @@ class AttachmentController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  int  $taskId
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(int $taskId)
     {
-        //
+        return response()->json(Attachment::where('task_id', $taskId)->get());
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  int  $taskId
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, int $taskId)
     {
-        //
+        if (!$request->file('file')->isValid()) {
+            return response()->json([
+                'code' => 422,
+                'message' => 'Unprocessable Entity',
+            ], 422);
+        }
+
+        $path = $request->file('file')->store('public');
+
+        $created = Attachment::create([
+            'task_id' => $taskId,
+            'url' => $path,
+        ]);
+
+        return response()->json($created, 201);
     }
 
     /**

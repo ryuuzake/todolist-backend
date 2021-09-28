@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Attachment extends Model
 {
@@ -27,5 +28,10 @@ class Attachment extends Model
     public function task()
     {
         return $this->belongsTo('App\Task');
+    }
+
+    public function getUrlAttribute($value)
+    {
+        return env('APP_URL') . Storage::url($value);
     }
 }

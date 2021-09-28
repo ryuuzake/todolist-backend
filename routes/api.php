@@ -30,4 +30,8 @@ Route::group(['prefix' => 'auth'], function ($router) {
     Route::post('reset-password', 'Auth\ResetPasswordController@reset');
 });
 
-Route::apiResource('tasks', 'TaskController');
+Route::group(['prefix' => 'tasks'], function ($router) {
+    Route::get('{taskId}/attachments', 'AttachmentController@index');
+    Route::post('{taskId}/attachments', 'AttachmentController@store');
+    Route::apiResource('', 'TaskController');
+});
