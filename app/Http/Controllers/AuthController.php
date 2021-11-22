@@ -30,6 +30,8 @@ class AuthController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:App\User',
             'password' => 'required|confirmed',
+            'firebase_uid' => 'nullable|string',
+            'fcm_token' => 'nullable|string',
         ]);
 
         try {
@@ -38,6 +40,16 @@ class AuthController extends Controller
                 'email' => $request->email,
                 'password' => app('hash')->make($request->password)
             ]);
+
+            if ($request->exists('firebase_uid')) {
+                $user->firebase_uid = $request->firebase_uid;
+                $user->save();
+            }
+
+            if ($request->exists('fcm_token')) {
+                $user->fcm_token = $request->fcm_token;
+                $user->save();
+            }
 
             return response()->json($user, 201);
         } catch (\Exception $e) {

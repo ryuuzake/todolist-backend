@@ -29,6 +29,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Task extends Model
 {
+    protected $attributes = [
+        'is_done' => false,
+    ];
+
     /**
      * The attributes that should be cast.
      *
@@ -36,6 +40,7 @@ class Task extends Model
      */
     protected $casts = [
         'user_id' => 'integer',
+        'is_done' => 'boolean',
     ];
 
     /**
@@ -44,7 +49,7 @@ class Task extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'body', 'user_id'
+        'title', 'body', 'user_id', 'is_done',
     ];
 
     public function user()

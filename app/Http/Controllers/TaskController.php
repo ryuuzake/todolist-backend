@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Task\CreateTaskRequest;
+use App\Notifications\TaskDone;
 use App\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -139,10 +140,15 @@ class TaskController extends Controller
     public function update(Request $request, Task $task)
     {
         $request->validate([
-            'user_id' => 'nullable|exists:App\User,id'
+            'user_id' => 'nullable|exists:App\User,id',
+            'is_done' => 'boolean',
         ]);
 
         $task->update($request->all());
+
+        if ($request->exists('is_done') && $request->is_done) {
+            auth()->user()->notify(new TaskDone);
+        }
 
         return response()->json($task);
     }
